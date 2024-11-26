@@ -36,3 +36,11 @@ brew install portaudio (MacOS)  -> check with : brew list portaudio
 sudo pip install pyaudio
 ```
 
+
+## Wikipedia
+
+- Installer et importer la bibliothèque [wikipedia](https://pypi.org/project/wikipedia/)
+
+```
+sudo pip install wikipedia
+```

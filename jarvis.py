@@ -1,6 +1,8 @@
 import pyttsx3
 import datetime
+import requests
 import speech_recognition as sr
+import wikipedia
 
 
 def parler(audio):
@@ -32,8 +34,6 @@ def salutation():
         parler("Bonsoir")
     else:
         parler("Bonjour")
-    dateDuJour()
-    heure()
     parler("Je suis à votre service. Comment puis-je vous aider ?")
 
 
@@ -49,10 +49,25 @@ def commande():
             print(req)
         except Exception as e:
             print(e)
-            parler(f"Il n'y a {e} pas dans la commande.")
+            parler(f"Il n'y a pas {e} dans la commande.")
             return "None"
         return req
 
 
-commande()
-#salutation()
+if __name__ == "__main__":
+    salutation()
+    while True:
+        requete = commande().lower()
+        if 'heure' in requete:
+            heure()
+        elif 'date' in requete:
+            dateDuJour()
+        elif 'quitter' in requete:
+            quit()
+        elif 'wikipédia' in requete:
+            parler("Recherche en cours...")
+            requete = requete.replace("wikipédia", "")
+            wikipedia.set_lang("fr")
+            result = wikipedia.summary(requete, sentences=2) # 2 premieres phraases
+            print(result)
+            parler(result)
